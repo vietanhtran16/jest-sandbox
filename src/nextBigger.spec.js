@@ -10,5 +10,8 @@ describe("nextBigger", () => {
     expect(nextBigger(2017)).toBe(2071);
     expect(nextBigger(414)).toBe(441);
     expect(nextBigger(144)).toBe(414);
+    expect(nextBigger(275)).toBe(527);
+    expect(nextBigger(378421)).toBe(381247);
+    expect(nextBigger(1234567890)).toBe(1234567908);
   });
 });

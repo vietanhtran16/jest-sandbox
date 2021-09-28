@@ -4,15 +4,23 @@ export const nextBigger = (number) => {
   }
   const digits = number.toString().split("");
   for (let index = digits.length - 1; index > -1; index--) {
-    const digitToTheRightIndex = index + 1;
-    const digitToTheRight = digits[digitToTheRightIndex];
     const currentDigit = digits[index];
-    const newNumber = [...digits];
-    newNumber[index] = digitToTheRight;
-    newNumber[digitToTheRightIndex] = currentDigit;
-    const potentialNextBiggerNumber = parseInt(newNumber.join(""));
-    if (potentialNextBiggerNumber > number) {
-      return potentialNextBiggerNumber;
+    const digitsToTheRight = digits.slice(index).sort((a, b) => a - b);
+    const nextBiggerDigit = digitsToTheRight.find(
+      (digit) => digit > currentDigit
+    );
+    if (nextBiggerDigit) {
+      const nextBiggerDigitIndex = digitsToTheRight.indexOf(nextBiggerDigit);
+      const digitsToTheRightWithoutBiggerDigit = [
+        ...digitsToTheRight.slice(0, nextBiggerDigitIndex),
+        ...digitsToTheRight.slice(nextBiggerDigitIndex + 1),
+      ];
+      const nextBiggerNumber = [
+        ...digits.slice(0, index),
+        nextBiggerDigit,
+        ...digitsToTheRightWithoutBiggerDigit,
+      ].join("");
+      return parseInt(nextBiggerNumber);
     }
   }
   return -1;
