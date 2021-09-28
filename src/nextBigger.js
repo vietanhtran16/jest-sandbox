@@ -3,14 +3,19 @@ export const nextBigger = (number) => {
     return -1;
   }
   const digits = number.toString().split("");
-  const lastDigit = digits[digits.length - 1];
-  const secondToLastDigit = digits[digits.length - 2];
-  const nextBiggerNumber = [
-    ...digits.slice(0, digits.length - 2),
-    lastDigit,
-    secondToLastDigit,
-  ].join("");
-  return parseInt(nextBiggerNumber);
+  for (let index = digits.length - 1; index > -1; index--) {
+    const digitToTheRightIndex = index + 1;
+    const digitToTheRight = digits[digitToTheRightIndex];
+    const currentDigit = digits[index];
+    const newNumber = [...digits];
+    newNumber[index] = digitToTheRight;
+    newNumber[digitToTheRightIndex] = currentDigit;
+    const potentialNextBiggerNumber = parseInt(newNumber.join(""));
+    if (potentialNextBiggerNumber > number) {
+      return potentialNextBiggerNumber;
+    }
+  }
+  return -1;
 };
 
 const areAllDigitSame = (number) => {
