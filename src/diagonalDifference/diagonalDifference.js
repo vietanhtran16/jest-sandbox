@@ -1,6 +1,5 @@
 export function diagonalDifference(arr) {
-  const copyOfArr = arr.slice().map((row) => row.slice());
-  const reverseArr = copyOfArr.map((row) => row.reverse());
+  const reverseArr = arr.map((row) => [...row].reverse());
   const primaryDiagonalSum = sum(getDiagonalNumbers(arr, 0, []));
   const secondaryDiagonalSum = sum(getDiagonalNumbers(reverseArr, 0, []));
   return Math.abs(primaryDiagonalSum - secondaryDiagonalSum);
